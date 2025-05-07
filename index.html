@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barbie: A Diva da Moda e das Probabilidades ✨</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #ffe6f7; /* Um rosa suave e fashion! */
+            background-image: url('https://static.vecteezy.com/ti/fotos-gratis/p1/13002116-fundo-abstrato-de-textura-de-glitter-rosa-foto.jpg'); /* Fundo de glitter rosa! */
+            background-size: cover;
+            background-position: center;
+            font-size: 1.2em; /* Aumentando o tamanho da fonte base */
+        }
+        #jogo-container {
+            background-color: rgba(255, 255, 255, 0.9); /* Rosa clarinho para o palco fashion com transparência! */
+            padding: 40px; /* Aumentando o padding */
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Sombra mais pronunciada */
+            text-align: center;
+        }
+        #barbie-titulo {
+            font-size: 3em; /* Título maior e mais diva! */
+            margin-bottom: 30px;
+            color: #ff69b4; /* Rosa choque para o título! */
+            text-shadow: 2px 2px #f08080;
+        }
+        #pergunta-diva {
+            font-size: 1.5em; /* Perguntas maiores! */
+            font-weight: bold;
+            color: #da70d6; /* Orquídea fashion! */
+            margin-bottom: 20px;
+        }
+        .opcao-look {
+            padding: 15px 30px; /* Botões maiores */
+            font-size: 1.2em; /* Texto dos botões maior */
+            border: none;
+            border-radius: 10px;
+            background-color: #ba55d3; /* Lilás elegante! */
+            color: white;
+            cursor: pointer;
+            margin: 10px;
+            transition: background-color 0.3s ease;
+        }
+        .opcao-look:hover {
+            background-color: #9400d3; /* Roxo vibrante! */
+        }
+        #mensagem-diva {
+            margin-top: 30px;
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #ff1493; /* Pink arrasador! */
+        }
+        #status-diva {
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: #8a2be2; /* Roxo sofisticado! */
+        }
+        #ranking-diva-container {
+            margin-top: 50px;
+            text-align: left;
+        }
+        #ranking-lista-diva {
+            list-style-type: decimal;
+            padding-left: 30px;
+            color: #c71585; /* Vermelho fashionista! */
+            font-size: 1.2em; /* Ranking maior */
+        }
+        #salvar-ranking-btn {
+            padding: 12px 25px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 8px;
+            background-color: #4682b4; /* Azul estiloso! */
+            color: white;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: background-color 0.3s ease;
+        }
+        #salvar-ranking-btn:hover {
+            background-color: #2e648b;
+        }
+        #nome-diva {
+            padding: 10px;
+            margin-top: 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 1.2em; /* Input maior */
+        }
+        #compartilhar-diva {
+            margin-top: 40px;
+        }
+        #compartilhar-whatsapp-btn {
+            padding: 12px 25px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 8px;
+            background-color: #25d366; /* Verde WhatsApp fashion! */
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        #compartilhar-whatsapp-btn:hover {
+            background-color: #128c7e;
+        }
+    </style>
+</head>
+<body>
+    <div id="jogo-container">
+        <div id="barbie-titulo">👑 Barbie: A Diva da Moda e das Probabilidades ✨</div>
+        <div id="status-diva">
+            Vidas: <span id="vidas-diva">3</span> ❤️ | Pontuação: <span id="pontuacao-diva">0</span> 💎
+        </div>
+        <div id="pergunta-diva"></div>
+        <div id="opcoes-diva">
+            </div>
+        <div id="mensagem-diva">Decifre as probabilidades fashion, amiga! 😉</div>
+
+        <div id="ranking-diva-container">
+            <h2>💖 Ranking das Divas da Moda Probabilística! 💖</h2>
+            <ol id="ranking-lista-diva"></ol>
+            <input type="text" id="nome-diva" placeholder="Seu nome de diva fashion estratégica!">
+            <button id="salvar-ranking-btn" onclick="salvarRanking()">Salvar no Ranking! 🏆</button>
+        </div>
+
+        <div id="compartilhar-diva">
+            <button id="compartilhar-whatsapp-btn" onclick="compartilharNoWhatsapp()">Compartilhar no Whatsapp! 🚀</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+    <script>
+        // Código para reiniciar o ranking (execute uma vez e depois comente ou remova)
+        // localStorage.removeItem('barbieModaProbabilidadeRanking');
+        // console.log("Ranking reiniciado!");
+
+        let vidasDiva = 3;
+        let pontuacaoDiva = 0;
+        let rankingDiva = carregarRanking(); // Carrega o ranking ao iniciar o jogo
+        let desafioAtual = null;
+
+        function carregarRanking() {
+            const rankingSalvo = localStorage.getItem('barbieModaProbabilidadeRanking');
+            return rankingSalvo ? JSON.parse(rankingSalvo) : [];
+        }
+
+        function salvarRankingLocal() {
+            localStorage.setItem('barbieModaProbabilidadeRanking', JSON.stringify(rankingDiva));
+        }
+
+        function atualizarStatusDiva() {
+            document.getElementById('vidas-diva').textContent = vidasDiva;
+            document.getElementById('pontuacao-diva').textContent = pontuacaoDiva;
+        }
+
+        function apresentarDesafio() {
+            console.log("A função apresentarDesafio foi chamada!"); // ADICIONEI ESTA LINHA
+            desafioAtual = gerarDesafioDiva();
+            document.getElementById('pergunta-diva').textContent = desafioAtual.pergunta;
+
+            const opcoesDiv = document.getElementById('opcoes-diva');
+            opcoesDiv.innerHTML = '';
+
+            desafioAtual.opcoes.forEach(opcao => {
+                const botaoOpcao = document.createElement('button');
+                botaoOpcao.classList.add('opcao-look');
+                botaoOpcao.textContent = opcao.texto;
+                botaoOpcao.onclick = () => escolherResposta(opcao.probabilidadeAcerto);
+                opcoesDiv.appendChild(botaoOpcao);
+            });
+        }
+
+        function escolherResposta(probabilidadeEscolhida) {
+            if (!desafioAtual) return;
+
+            document.getElementById('mensagem-diva').textContent = "Analisando suas chances fashion, diva...";
+
+            setTimeout(() => {
+                const sorteio = Math.random();
+                const probabilidadeCorreta = desafioAtual.probabilidadeCorreta;
+                const margemErro = 0.1; // Uma pequena margem para considerar "acerto"
+
+                if (Math.abs(probabilidadeEscolhida - probabilidadeCorreta) <= margemErro) {
+                    document.getElementById('mensagem-diva').textContent = `Sua intuição fashion probabilística é incrível! +2 pontos! 🤩`;
+                    pontuacaoDiva += 2;
+                    confetti({
+                        particleCount: 100,
+                        spread: 70,
+                        origin: { y: 0.6 }
+                    }); // Confetes ao acertar!
+                } else {
+                    document.getElementById('mensagem-diva').textContent = `Hmm, as probabilidades fashion eram um pouco diferentes, amiga! 😥 Menos 1 vida!`;
+                    vidasDiva--;
+                    if (vidasDiva <= 0) {
+                        gameOverDiva();
+                        return;
+                    }
+                }
+                atualizarStatusDiva();
+                apresentarDesafio();
+            }, 1500);
+        }
+
+        function gerarDesafioDiva() {
+            const desafiosModaProbabilidade = [
+                {
+                    pergunta: "Em um desfile com 5 vestidos de festa (alta chance de brilhar) e 2 looks casuais (baixa chance de impressionar), qual a probabilidade de a primeira modelo a entrar na passarela estar vestindo algo que realmente cause impacto?",
+                    opcoes: [
+                        { texto: "Aproximadamente 70%", probabilidadeAcerto: 0.7 },
+                        { texto: "Aproximadamente 30%", probabilidadeAcerto: 0.3 },
+                        { texto: "Exatamente 50%", probabilidadeAcerto: 0.5 }
+                    ],
+                    probabilidadeCorreta: 0.7
+                },
+                {
+                    pergunta: "Você tem 3 pares de sapatos de salto (mais usados em eventos) e 7 tênis (mais usados no dia a dia). Se você pegar um par de sapatos sem olhar, qual a probabilidade de ser um salto alto?",
+                    opcoes: [
+                        { texto: "30%", probabilidadeAcerto: 0.3 },
+                        { texto: "70%", probabilidadeAcerto: 0.7 },
+                        { texto: "50%", probabilidadeAcerto: 0.5 }
+                    ],
+                    probabilidadeCorreta: 0.3
+                },
+                {
+                    pergunta: "Em uma caixa de acessórios com 1 colar de diamante (raríssimo), 5 colares de pérolas (comuns) e 4 pulseiras (comuns), qual a probabilidade de você sortear o item mais exclusivo?",
+                    opcoes: [
+                        { texto: "10%", probabilidadeAcerto: 0.1 },
+                        { texto: "50%", probabilidadeAcerto: 0.5 },
+                        { texto: "90%", probabilidadeAcerto: 0.9 }
+                    ],
+                    probabilidadeCorreta: 0.1
+                },
+                {
+                    pergunta: "De 10 revistas de moda, 8 destacam a tendência de cores vibrantes para a estação. Se você escolher uma revista aleatoriamente, qual a probabilidade de pegar uma que fale sobre essa tendência?",
+                    opcoes: [
+                        { texto: "80%", probabilidadeAcerto: 0.8 },
+                        { texto: "20%", probabilidadeAcerto: 0.2 },
+                        { texto: "50%", probabilidadeAcerto: 0.5 }
+                    ],
+                    probabilidadeCorreta: 0.8
+                },
+                {
+                    pergunta: "Em um guarda-roupa com 4 vestidos estampados (tendência forte) e 6 vestidos lisos (clássicos), qual a probabilidade de a primeira peça que você escolher para um evento ser um vestido que esteja na moda?",
+                    opcoes: [
+                        { texto: "40%", probabilidadeAcerto: 0.4 },
+                        { texto: "60%", probabilidadeAcerto: 0.6 },
+                        { texto: "50%", probabilidadeAcerto: 0.5 }
+                    ],
+                    probabilidadeCorreta: 0.4
+                },
+                {
+                    pergunta: "Você está montando um look com 2 blusas estampadas (chamativas) e 5 blusas neutras (versáteis). Se você pegar uma blusa sem olhar, qual a probabilidade de escolher uma peça que seja mais fácil de combinar com outras roupas?",
+                    opcoes: [
+                        { texto: "Aproximadamente 71%", probabilidadeAcerto: 5/7 },
+                        { texto: "Aproximadamente 29%", probabilidadeAcerto: 2/7 },
+                        { texto: "Exatamente 50%", probabilidadeAcerto: 0.5 }
+                    ],
+                    probabilidadeCorreta: 5/7
+                },
+                {
+                    pergunta: "Em uma coleção de bolsas com 3 clutches (usadas em festas), 4 bolsas de ombro (casuais) e 1 bolsa tote (espaçosa), se você escolher uma bolsa aleatoriamente, qual a probabilidade de ser uma bolsa ideal para uma ocasião formal?",
+                    opcoes: [
+                        { texto: "12.5%", probabilidadeAcerto: 1/8 },
+                        { texto: "37.5%", probabilidadeAcerto: 3/8 },
+                        { texto: "50%", probabilidadeAcerto: 0.5 }
+                    ],
+                    probabilidadeCorreta: 1/8
+                },
+                {
+                    pergunta: "De 15 blogueiras de moda, 10 preferem usar prata e 5 preferem usar ouro. Se você encontrar uma blogueira aleatória, qual a probabilidade de ela estar usando acessórios prateados?",
+                    opcoes: [
+                        { texto: "Aproximadamente 67%", probabilidadeAcerto: 10/15 },
+                        { texto: "Aproximadamente 33%", probabilidadeAcerto: 5/15 },
+                        { texto: "Exatamente 50%", probabilidadeAcerto: 0.5 }
+                    ],
+                    probabilidadeCorreta: 10/15
+                },
+                {
+                    pergunta: "Você está escolhendo um lenço para complementar seu look. Tem 6 lenços de seda (mais elegantes) e 2 lenços de algodão (mais casuais). Se você pegar um lenço sem olhar, qual a probabilidade de escolher um acessório que adicione um toque de sofisticação?",
+                    opcoes: [
+                        { texto: "25%", probabilidadeAcerto: 2/8 },
+                        { texto: "75%", probabilidadeAcerto: 6/8 },
+                        { texto: "50%", probabilidadeAcerto: 0.5 }
+                    ],
+                    probabilidadeCorreta: 6/8
+                },
+                {
+                    pergunta: "Em uma arara de roupas com 7 saias (3 curtas, 4 longas) e 5 calças (todas compridas), se você pegar uma peça de roupa sem olhar, qual a probabilidade de ser uma peça curta?",
+                    opcoes: [
+                        { texto: "30%", probabilidadeAcerto: 3/12 },
+                        { texto: "Aproximadamente 42%", probabilidadeAcerto: 5/12 },
+                        { texto: "Aproximadamente 58%", probabilidadeAcerto: 7/12 }
+                    ],
+                    probabilidadeCorreta: 3/12
+                },
+                 {
+                    pergunta: "Você tem 4 chapéus de abas largas (mais usados no verão) e 3 gorros (mais usados no inverno). Se você pegar um chapéu aleatoriamente, qual a probabilidade de ser um item mais adequado para os dias quentes?",
+                    opcoes: [
+                        { texto: "Aproximadamente 57%", probabilidadeAcerto: 4/7 },
+                        { texto: "Aproximadamente 43%", probabilidadeAcerto: 3/7 },
+                        { texto: "Exatamente 50%", probabilidadeAcerto: 0.5 }
+                    ],
+                    probabilidadeCorreta: 4/7
+                },
+                {
+                    pergunta: "Em uma paleta de cores com 6 tons pastel (tendência suave) e 4 cores neon (tendência vibrante), se um maquiador escolher uma cor aleatoriamente para um look de passarela, qual a probabilidade de ser uma cor que siga a tendência mais discreta?",
+                    opcoes: [
+                        { texto: "40%", probabilidadeAcerto: 4/10 },
+                        { texto: "60%", probabilidadeAcerto: 6/10 },
+                        { texto: "50%", probabilidadeAcerto: 0.5 }
+                    ],
+                    probabilidadeCorreta: 6/10
+                },
+                {
+                    pergunta: "Você está escolhendo um cinto para um vestido. Tem 5 cintos finos (mais elegantes) e 2 cintos largos (mais casuais). Se você pegar um cinto sem olhar, qual a probabilidade de escolher um acessório que valorize a silhueta de forma mais formal?",
+                    opcoes: [
+                        { texto: "Aproximadamente 71%", probabilidadeAcerto: 5/7 },
+                        { texto: "Aproximadamente 29%", probabilidadeAcerto: 2/7 },
+                        { texto: "Exatamente 50%", probabilidadeAcerto: 0.5 }
+                    ],
+                    probabilidadeCorreta: 5/7
+                },
+                {
+                    pergunta: "Em uma vitrine de joias com 2 anéis de prata (mais acessíveis) e 1 anel de ouro com diamante (mais luxuoso), se um cliente escolher um anel aleatoriamente, qual a probabilidade de ele escolher a peça mais valiosa?",
+                    opcoes: [
+                        { texto: "Aproximadamente 33%", probabilidadeAcerto: 1/3 },
+                        { texto: "Aproximadamente 67%", probabilidadeAcerto: 2/3 },
+                        { texto: "Exatamente 50%", probabilidadeAcerto: 0.5 }
+                    ],
+                    probabilidadeCorreta: 1/3
+                },
+                {
+                    pergunta: "Você tem 3 óculos de sol com armação clássica (sempre na moda) e 2 com armações da última tendência (podem sair de moda rápido). Se você pegar um par de óculos sem olhar, qual a probabilidade de escolher um acessório que provavelmente continuará estiloso por mais tempo?",
+                    opcoes: [
+                        { texto: "40%", probabilidadeAcerto: 2/5 },
+                        { texto: "60%", probabilidadeAcerto: 3/5 },
+                        { texto: "50%", probabilidadeAcerto: 0.5 }
+                    ],
+                    probabilidadeCorreta: 3/5
+                }
+            ];
+            return desafiosModaProbabilidade[Math.floor(Math.random() * desafiosModaProbabilidade.length)];
+        }
+
+        function gameOverDiva() {
+            document.getElementById('pergunta-diva').textContent = `Game Over, diva! 😭 Suas previsões fashion probabilísticas chegaram ao fim com ${pontuacaoDiva} 💎`;
+            document.getElementById('opcoes-diva').innerHTML = '<button class="opcao-look" onclick="reiniciarJogoDiva()">Tentar prever as tendências de novo, amiga! ✨</button>';
+            document.getElementById('mensagem-diva').textContent = 'Mostre sua intuição fashion e probabilística novamente!';
+            document.getElementById('compartilhar-diva').style.display = 'block';
+        }
+
+        function reiniciarJogoDiva() {
+            vidasDiva = 3;
+            pontuacaoDiva = 0;
+            atualizarStatusDiva();
+            document.getElementById('mensagem-diva').textContent = 'Prepare-se para analisar as chances do mundo da moda, amiga! 😉';
+            document.getElementById('opcoes-diva').innerHTML = '';
+            apresentarDesafio();
+            document.getElementById('compartilhar-diva').style.display = 'none';
+        }
+
+        function salvarRanking() {
+            const nomeDiva = document.getElementById('nome-diva').value.trim();
+            if (nomeDiva) {
+                rankingDiva.push({ nome: nomeDiva, pontos: pontuacaoDiva });
+                rankingDiva.sort((a, b) => b.pontos - a.pontos);
+                atualizarRankingVisualDiva();
+                salvarRankingLocal(); // Salva o ranking no localStorage
+                document.getElementById('nome-diva').value = '';
+            } else {
+                alert('Digite seu nome de diva da moda estratégica!');
+            }
+        }
+
+        function atualizarRankingVisualDiva() {
+            const rankingListaDiva = document.getElementById('ranking-lista-diva');
+            rankingListaDiva.innerHTML = '';
+            for (let i = 0; i < rankingDiva.length; i++) {
+                const itemRankingDiva = document.createElement('li');
+                itemRankingDiva.textContent = `${rankingDiva[i].nome}: ${rankingDiva[i].pontos} pontos 💎`;
+                rankingListaDiva.appendChild(itemRankingDiva);
+            }
+        }
+
+        function compartilharNoWhatsapp() {
+            const mensagem = `Diva da moda probabilística na área! 👑 Olha só minha pontuação em Barbie: A Diva da Moda e das Probabilidades: ${pontuacaoDiva} 💎! Arrasei nas minhas previsões fashion! ✨ Jogue também!`;
+            const url = `https://wa.me/?text=${encodeURIComponent(mensagem)}`;
+            window.open(url, '_blank');
+        }
+
+        // Iniciar o jogo!
+        atualizarStatusDiva();
+        apresentarDesafio();
+        document.getElementById('compartilhar-diva').style.display = 'none';
+        atualizarRankingVisualDiva(); // Exibe o ranking carregado inicialmente
+    </script>
+</body>
+</html>
