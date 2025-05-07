@@ -16,39 +16,40 @@
             background-image: url('https://static.vecteezy.com/ti/fotos-gratis/p1/13002116-fundo-abstrato-de-textura-de-glitter-rosa-foto.jpg'); /* Fundo de glitter rosa! */
             background-size: cover;
             background-position: center;
-            font-size: 1.2em;
+            font-size: 1em; /* Diminuindo a fonte base */
         }
         #jogo-container {
-            background-color: rgba(255, 255, 255, 0.9);
-            padding: 30px; /* Reduzindo um pouco o padding em geral */
+            background-color: white; /* Removendo a transparência! */
+            padding: 20px; /* Reduzindo o padding */
             border-radius: 15px;
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
             text-align: center;
-            margin: 20px; /* Adicionando margem para respiro nas laterais */
+            margin: 15px; /* Reduzindo a margem */
+            max-width: 90%; /* Largura máxima para telas maiores */
         }
         #barbie-titulo {
-            font-size: 2.5em; /* Reduzindo o tamanho do título em telas menores */
-            margin-bottom: 20px;
+            font-size: 2em; /* Reduzindo o tamanho do título */
+            margin-bottom: 15px;
             color: #ff69b4;
-            text-shadow: 2px 2px #f08080;
+            text-shadow: 1px 1px #f08080;
         }
         #pergunta-diva {
-            font-size: 1.3em; /* Reduzindo o tamanho da pergunta */
+            font-size: 1.1em; /* Reduzindo o tamanho da pergunta */
             font-weight: bold;
             color: #da70d6;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
         .opcao-look {
-            padding: 12px 25px; /* Reduzindo o padding dos botões */
-            font-size: 1em; /* Reduzindo o tamanho do texto dos botões */
+            padding: 10px 20px; /* Reduzindo o padding dos botões */
+            font-size: 0.9em; /* Reduzindo o tamanho do texto dos botões */
             border: none;
-            border-radius: 10px;
+            border-radius: 8px;
             background-color: #ba55d3;
             color: white;
             cursor: pointer;
-            margin: 8px; /* Reduzindo a margem dos botões */
+            margin: 6px; /* Reduzindo a margem dos botões */
             transition: background-color 0.3s ease;
-            width: 80%; /* Ocupando mais largura em telas menores */
+            width: 90%; /* Ocupando mais largura em telas menores */
             display: block; /* Botões em linhas separadas */
             margin-left: auto;
             margin-right: auto;
@@ -57,59 +58,59 @@
             background-color: #9400d3;
         }
         #mensagem-diva {
-            margin-top: 20px; /* Reduzindo a margem superior */
-            font-size: 1.2em;
+            margin-top: 15px; /* Reduzindo a margem superior */
+            font-size: 1em;
             font-weight: bold;
             color: #ff1493;
         }
         #status-diva {
-            margin-top: 15px; /* Reduzindo a margem superior */
-            font-size: 1em;
+            margin-top: 10px; /* Reduzindo a margem superior */
+            font-size: 0.9em;
             color: #8a2be2;
         }
         #ranking-diva-container {
-            margin-top: 30px; /* Reduzindo a margem superior */
+            margin-top: 20px; /* Reduzindo a margem superior */
             text-align: left;
         }
         #ranking-lista-diva {
             list-style-type: decimal;
-            padding-left: 20px; /* Reduzindo o padding esquerdo */
+            padding-left: 15px; /* Reduzindo o padding esquerdo */
             color: #c71585;
-            font-size: 1em;
+            font-size: 0.9em;
         }
         #salvar-ranking-btn {
-            padding: 10px 20px; /* Reduzindo o padding do botão */
-            font-size: 1em;
+            padding: 8px 15px; /* Reduzindo o padding do botão */
+            font-size: 0.9em;
             border: none;
-            border-radius: 8px;
+            border-radius: 6px;
             background-color: #4682b4;
             color: white;
             cursor: pointer;
-            margin-top: 10px; /* Reduzindo a margem superior */
+            margin-top: 8px; /* Reduzindo a margem superior */
             transition: background-color 0.3s ease;
         }
         #salvar-ranking-btn:hover {
             background-color: #2e648b;
         }
         #nome-diva {
-            padding: 8px; /* Reduzindo o padding do input */
-            margin-top: 10px; /* Reduzindo a margem superior */
+            padding: 6px; /* Reduzindo o padding do input */
+            margin-top: 8px; /* Reduzindo a margem superior */
             border: 1px solid #ccc;
-            border-radius: 8px;
-            font-size: 1em;
-            width: 70%; /* Ocupando mais largura */
+            border-radius: 6px;
+            font-size: 0.9em;
+            width: 80%; /* Ocupando mais largura */
             margin-left: auto;
             margin-right: auto;
             display: block;
         }
         #compartilhar-diva {
-            margin-top: 30px; /* Reduzindo a margem superior */
+            margin-top: 20px; /* Reduzindo a margem superior */
         }
         #compartilhar-whatsapp-btn {
-            padding: 10px 20px; /* Reduzindo o padding do botão */
-            font-size: 1em;
+            padding: 8px 15px; /* Reduzindo o padding do botão */
+            font-size: 0.9em;
             border: none;
-            border-radius: 8px;
+            border-radius: 6px;
             background-color: #25d366;
             color: white;
             cursor: pointer;
@@ -122,33 +123,33 @@
         /* Media Queries para telas menores (até 600px de largura) */
         @media (max-width: 600px) {
             body {
-                font-size: 1em; /* Reduzindo ainda mais a fonte base em telas bem pequenas */
+                font-size: 0.9em; /* Reduzindo ainda mais a fonte */
             }
             #barbie-titulo {
-                font-size: 2em;
+                font-size: 1.8em;
             }
             #pergunta-diva {
-                font-size: 1.1em;
-            }
-            .opcao-look {
-                font-size: 0.9em;
-                padding: 10px 20px;
-            }
-            #mensagem-diva {
                 font-size: 1em;
             }
-            #status-diva {
+            .opcao-look {
+                font-size: 0.8em;
+                padding: 8px 15px;
+            }
+            #mensagem-diva {
                 font-size: 0.9em;
+            }
+            #status-diva {
+                font-size: 0.8em;
             }
             #ranking-lista-diva {
-                font-size: 0.9em;
-                padding-left: 15px;
+                font-size: 0.8em;
+                padding-left: 10px;
             }
             #salvar-ranking-btn, #compartilhar-whatsapp-btn, #nome-diva {
-                font-size: 0.9em;
+                font-size: 0.8em;
             }
             #jogo-container {
-                padding: 20px;
+                padding: 15px;
                 margin: 10px;
             }
         }
