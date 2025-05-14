@@ -5,7 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Barbie: A Diva da Moda e das Probabilidades ✨</title>
     <style>
+
+
+
         body {
+            
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
             justify-content: center;
@@ -153,6 +157,21 @@
                 margin: 10px;
             }
         }
+
+        a.botao {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px 24px;
+      background-color: #4CAF50;
+      color: white;
+      text-decoration: none;
+      font-size: 16px;
+      border-radius: 8px;
+      transition: background-color 0.3s;
+    }
+    a.botao:hover {
+      background-color: #45a049;
+    }
     </style>
 </head>
 <body>
@@ -170,7 +189,8 @@
             <h2>💖 Ranking das Divas da Moda Probabilística! 💖</h2>
             <ol id="ranking-lista-diva"></ol>
             <input type="text" id="nome-diva" placeholder="Seu nome de diva fashion estratégica!">
-            <button id="salvar-ranking-btn" onclick="salvarRanking()">Salvar no Ranking! 🏆</button>
+            <a id="salvar-ranking-btn" onclick="salvarRanking()">Salvar no Ranking! 🏆</a>
+            <a class="botao" href="https://forms.gle/1YJRWhYBMQzefp9s8" target="_blank">Avalie nosso jogo!</a>
         </div>
 
         <div id="compartilhar-diva">
@@ -441,3 +461,5 @@
     </script>
 </body>
 </html>
+  
+
